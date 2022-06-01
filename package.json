@@ -1,0 +1,11 @@
+{
+  "name": "mergegame",
+  "scripts": {
+    "minify": "npx terser lib/client.js --ecma 5 -o lib/client.js",
+    "build": "ts && npm run minify"
+  },
+  "devDependencies": {
+    "terser": "^5.14.0",
+    "typescript": "^4.7.2"
+  }
+}
