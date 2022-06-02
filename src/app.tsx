@@ -1,3 +1,3 @@
 const body = document.body;
-const board = <Board />;
-body.append(board);
+const game = new Game({ size: 10 });
+body.append(game.board);
