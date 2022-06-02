@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root,
+body,
+html {
+  font-size: 16px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.board {
+  width: 80vmin;
+  height: 80vmin;
+  position: fixed;
+  top: 10vmin;
+  left: 10vmin;
+  display: flex;
+  flex-direction: column;
+  box-sizing: content-box;
+  gap: .5vmin;
+
+  > .row {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: .5vmin;
+
+    > div {
+      border: #555 .1rem solid;
+      border-radius: 1vmin;
+      flex: 1;
+    }
+
+    > .path {
+      background-color: #777;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &:hover {
+        background-color: #555;
+      }
+
+      > .enemy {
+        border-radius: 50%;
+        width: 50%;
+        height: 50%;
+        background-color: red;
+      }
+    }
+
+    > .tile {
+      background-color: #aaa;
+
+      &:hover {
+        background-color: #888;
+      }
+    }
+  }
+}
