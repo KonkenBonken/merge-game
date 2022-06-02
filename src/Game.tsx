@@ -20,4 +20,8 @@ class Game {
     ] as HTMLElement[];
     this.spawn = this.path[0];
   }
+
+  spawnEnemy() {
+    const enemy = new Enemy();
+  }
 }
