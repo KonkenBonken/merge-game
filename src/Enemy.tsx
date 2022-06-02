@@ -34,6 +34,10 @@ class Enemy {
   hit(damage = 1) {
     this.health -= damage;
     if (!this.health)
-      this.element.remove();
+      this.kill()
+  }
+  kill() {
+    clearInterval(this.interval);
+    this.element.remove();
   }
 }

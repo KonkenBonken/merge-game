@@ -19,6 +19,23 @@ class Game {
       ...this.board.querySelectorAll('.row:not(:first-child)>:last-child')
     ] as HTMLElement[];
     this.spawn = this.path[0];
+
+    this.path.forEach(tile =>
+      tile.addEventListener('click', () =>
+        tile.querySelectorAll('.enemy').forEach(enemy =>
+          // @ts-expect-error
+          enemy.enemy.hit()
+        )));
+
+    setTimeout(() => this.start(), 2000);
+  }
+
+  start(enemyDelay = 5) {
+    const spawn = () => {
+      this.spawnEnemy();
+      setTimeout(() => spawn(), enemyDelay * 1000 * (Math.random() * 1.5 + .25));
+    };
+    spawn();
   }
 
   spawnEnemy() {
