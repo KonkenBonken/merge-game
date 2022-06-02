@@ -48,7 +48,7 @@ html {
   border-radius: 50%;
   width: 50%;
   height: 50%;
-  background-color: red;
+  background-color: hsl(calc((var(--health) - 1) * 20), 100%, 50%);
 }
 .board > .row > .tile {
   background-color: #aaa;
