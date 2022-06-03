@@ -46,9 +46,23 @@ html {
 }
 .board > .row > .path > .enemy {
   border-radius: 50%;
-  width: 50%;
-  height: 50%;
-  background-color: hsl(calc((var(--health) - 1) * 20), 100%, 50%);
+  max-width: 50%;
+  aspect-ratio: 1/1;
+  flex: 1;
+  position: relative;
+  background-color: hsl(calc(var(--health) * 90), 100%, 50%);
+}
+.board > .row > .path > .enemy::after {
+  position: absolute;
+  bottom: -1em;
+  height: 1.2em;
+  border-radius: 0.2em;
+  background-color: rgba(0, 0, 0, 0.2);
+  width: 80%;
+  line-height: 1.2;
+  content: attr(health);
+  left: 10%;
+  text-align: center;
 }
 .board > .row > .tile {
   background-color: #aaa;

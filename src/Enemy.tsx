@@ -5,13 +5,15 @@ type EnemyOptions = typeof defaultEnemyOptions; // All required
 class Enemy {
   element: HTMLElement;
   _health: number = 0;
+  fullHealth: number = 0;
   interval: number;
   pathIndex: number = 0;
 
   get health() { return this._health }
   set health(value) {
     this._health = value;
-    this.element.style.setProperty('--health', this.health.toString())
+    this.element.style.setProperty('--health', (this.health / this.fullHealth).toFixed(2));
+    this.element.setAttribute('health', this.health.toString());
   }
 
   constructor(options: EnemyOptions | {} = {}) {
@@ -22,7 +24,7 @@ class Enemy {
     const { health, speed } = options as EnemyOptions;
 
     this.element = <div class='enemy' />;
-    this.health = health;
+    this.health = this.fullHealth = health;
     game.path[this.pathIndex++].append(this.element);
     // @ts-expect-error
     this.element.enemy = this;

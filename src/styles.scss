@@ -48,9 +48,23 @@ html {
 
       > .enemy {
         border-radius: 50%;
-        width: 50%;
-        height: 50%;
-        background-color: hsl(calc((var(--health) - 1) * 20), 100%, 50%);
+        max-width: 50%;
+        aspect-ratio: 1 / 1;
+        flex: 1;
+        position: relative;
+        background-color: hsl(calc(var(--health) * 90), 100%, 50%);
+        &::after {
+          position: absolute;
+          bottom: -1em;
+          height: 1.2em;
+          border-radius: .2em;
+          background-color: #0003;
+          width: 80%;
+          line-height: 1.2;
+          content: attr(health);
+          left: 10%;
+          text-align: center;
+        }
       }
     }
 
