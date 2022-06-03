@@ -1,4 +1,4 @@
-const defaultGameOptions = { size: 10, enemy: {} as EnemyOptions };
+const defaultGameOptions = { size: 10, playerHealth: 10, enemy: {} as EnemyOptions };
 
 type GameOptions = typeof defaultGameOptions; // All required
 
@@ -7,6 +7,7 @@ class Game {
   spawn: HTMLElement;
   path: HTMLElement[];
   options: GameOptions;
+  playerHealth: number;
 
   constructor(options: GameOptions | {} = {}) {
     for (const key in defaultGameOptions)
@@ -14,6 +15,8 @@ class Game {
         options[key] = defaultGameOptions[key];
 
     this.options = options as GameOptions;
+
+    this.playerHealth = this.options.playerHealth;
 
     this.board = <Board options={this.options} />;
     this.path = [
@@ -43,5 +46,9 @@ class Game {
 
   spawnEnemy(options: EnemyOptions) {
     const enemy = new Enemy(options);
+  }
+
+  damage(damage = 1) {
+    this.playerHealth -= damage;
   }
 }

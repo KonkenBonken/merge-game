@@ -36,7 +36,7 @@ class Enemy {
     if (game.path[this.pathIndex])
       game.path[this.pathIndex++].append(this.element);
     else
-      this.element.remove();
+      this.score();
   }
 
   hit(damage = 1) {
@@ -44,6 +44,12 @@ class Enemy {
     if (!this.health)
       this.kill()
   }
+
+  score() {
+    game.damage();
+    this.kill();
+  }
+
   kill() {
     clearInterval(this.interval);
     this.element.remove();
