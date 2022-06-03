@@ -33,7 +33,7 @@ class Game {
     setTimeout(() => this.start(), 2000);
   }
 
-  start(enemyDelay = 5) {
+  start(enemyDelay = this.options.enemy.delay) {
     const spawn = () => {
       this.spawnEnemy(this.options.enemy);
       setTimeout(() => spawn(), enemyDelay * 1000 * (Math.random() * 1.5 + .25));

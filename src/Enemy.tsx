@@ -1,4 +1,4 @@
-const defaultEnemyOptions = { speed: 1, health: 5 };
+const defaultEnemyOptions = { speed: 1, health: 5, delay: 5 };
 
 type EnemyOptions = typeof defaultEnemyOptions; // All required
 
