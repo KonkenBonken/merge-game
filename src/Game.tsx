@@ -1,4 +1,4 @@
-const defaultGameOptions = { size: 10 };
+const defaultGameOptions = { size: 10, enemy: {} as EnemyOptions };
 
 type GameOptions = typeof defaultGameOptions; // All required
 
@@ -6,13 +6,16 @@ class Game {
   board: HTMLElement;
   spawn: HTMLElement;
   path: HTMLElement[];
+  options: GameOptions;
 
   constructor(options: GameOptions | {} = {}) {
     for (const key in defaultGameOptions)
       if (!options.hasOwnProperty(key))
         options[key] = defaultGameOptions[key];
 
-    this.board = <Board options={options as GameOptions} />;
+    this.options = options as GameOptions;
+
+    this.board = <Board options={this.options} />;
     this.path = [
       ...[...this.board.querySelectorAll('.row:not(:first-child)>:first-child')].reverse(),
       ...this.board.querySelectorAll('.row:first-child>.path'),
@@ -22,9 +25,9 @@ class Game {
 
     this.path.forEach(tile =>
       tile.addEventListener('click', () =>
-        tile.querySelectorAll('.enemy').forEach(enemy =>
-          // @ts-expect-error
-          enemy.enemy.hit()
+        // @ts-expect-error
+        tile.querySelectorAll('.enemy').forEach((element: Element & { enemy: Enemy }) =>
+          element.enemy.hit()
         )));
 
     setTimeout(() => this.start(), 2000);
@@ -32,13 +35,13 @@ class Game {
 
   start(enemyDelay = 5) {
     const spawn = () => {
-      this.spawnEnemy();
+      this.spawnEnemy(this.options.enemy);
       setTimeout(() => spawn(), enemyDelay * 1000 * (Math.random() * 1.5 + .25));
     };
     spawn();
   }
 
-  spawnEnemy() {
-    const enemy = new Enemy();
+  spawnEnemy(options: EnemyOptions) {
+    const enemy = new Enemy(options);
   }
 }
