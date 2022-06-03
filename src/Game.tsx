@@ -26,12 +26,13 @@ class Game {
     ] as HTMLElement[];
     this.spawn = this.path[0];
 
-    this.path.forEach(tile =>
-      tile.addEventListener('click', () =>
-        // @ts-expect-error
-        tile.querySelectorAll('.enemy').forEach((element: Element & { enemy: Enemy }) =>
-          element.enemy.hit()
-        )));
+    this.path.forEach((tile: Element & { hit?: () => void }) => {
+      tile.hit = () =>
+        tile.querySelectorAll('.enemy').forEach((element: Element & { enemy?: Enemy }) =>
+          element.enemy ?.hit()
+        );
+      tile.addEventListener('click', tile.hit);
+    });
 
     setTimeout(() => this.start(), 2000);
   }
