@@ -1,6 +1,6 @@
-const defaultEnemyOptions = { speed: 1, health: 5, delay: 5 };
-
-type EnemyOptions = typeof defaultEnemyOptions; // All required
+type EnemyOptions = {
+  speed: number, health: number, delay: number
+};
 
 class Enemy {
   element: HTMLElement;
@@ -16,12 +16,8 @@ class Enemy {
     this.element.setAttribute('health', this.health.toString());
   }
 
-  constructor(options: EnemyOptions | {} = {}) {
-    for (const key in defaultEnemyOptions)
-      if (!options.hasOwnProperty(key))
-        options[key] = defaultEnemyOptions[key];
-
-    const { health, speed } = options as EnemyOptions;
+  constructor(options: EnemyOptions) {
+    const { health, speed } = options;
 
     this.element = <div class='enemy' />;
     this.health = this.fullHealth = health;

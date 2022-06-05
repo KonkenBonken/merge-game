@@ -1,6 +1,4 @@
-const defaultGameOptions = { size: 10, playerHealth: 10, enemy: {} as EnemyOptions };
-
-type GameOptions = typeof defaultGameOptions; // All required
+type GameOptions = { size: number, playerHealth: number, enemy: EnemyOptions };
 
 class Game {
   board: HTMLElement;
@@ -9,12 +7,8 @@ class Game {
   options: GameOptions;
   playerHealth: number;
 
-  constructor(options: GameOptions | {} = {}) {
-    for (const key in defaultGameOptions)
-      if (!options.hasOwnProperty(key))
-        options[key] = defaultGameOptions[key];
-
-    this.options = options as GameOptions;
+  constructor(options: GameOptions) {
+    this.options = options;
 
     this.playerHealth = this.options.playerHealth;
 
